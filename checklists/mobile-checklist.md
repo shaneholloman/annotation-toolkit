@@ -1,10 +1,10 @@
 # Mobile Checklist
 
-This checklist summarizes accessibility considerations specific to native mobile experiences (iOS and Android), drawing from [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/), the [W3C Guidance on Applying WCAG 2.2 to Mobile Applications](https://www.w3.org/TR/wcag2mobile-22/), and best practices identified by GitHub.
+This checklist summarizes accessibility considerations specific to iOS and Android, drawing from [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/), the [W3C Guidance on Applying WCAG 2.2 to Mobile Applications](https://www.w3.org/TR/wcag2mobile-22/), and best practices identified by GitHub.
 
-Use this checklist when designing or building **native mobile experiences** (iOS and Android). Native mobile has its own set of accessibility patterns, APIs, and user expectations that don't map cleanly to the web, so this checklist stands on its own. You don't need to also run through the [Designer Checklist](./designer-checklist.md) or [Engineering Checklist](./engineering-checklist.md) for a native app.
+Native mobile has its own set of accessibility patterns, APIs, and user expectations that don't map cleanly to the web. Use this checklist when designing or building **native mobile experiences** on iOS and Android. You don't need to also run through the [Designer Checklist](./designer-checklist.md) or [Engineering Checklist](./engineering-checklist.md) for a native app.
 
-The one exception: if part of your app uses a **web view** (an in-app browser, an OAuth flow, embedded docs, or any HTML-rendered content), apply the web checklists to that content. Flag those areas with a [View Context Stamp](../tutorials/mobile-annotations.md#view-context-stamps-and-details) so the handoff is explicit.
+The one exception: if part of your app uses a **web view**, apply the web checklists to that content. Flag those areas with a [View Context Stamp](../tutorials/mobile-annotations.md#view-context-stamps-and-details) so the handoff is explicit. Examples of web view content are an in-app browser, an OAuth flow, embedded docs, or any HTML-rendered content.
 
 For per-interaction annotation guidance, pair this checklist with the [User Interactions tutorial](../tutorials/user-interactions.md) and the [Mobile annotations tutorial](../tutorials/mobile-annotations.md). The mobile annotations tutorial also includes a list of [design considerations](../tutorials/mobile-annotations.md#design-considerations) worth reviewing before you start annotating. For per-SC application notes when auditing, see the [Mobile-WCAG Mapping (Internal only)](https://github.com/github/accessibility-audit-guide/blob/main/mobile/mobile-wcag-map.md).
 
@@ -55,7 +55,7 @@ For per-interaction annotation guidance, pair this checklist with the [User Inte
 
 ### Exercises
 
-- Sketch out the focus order with arrows before annotating. If the line zig-zags, simplify the layout or regroup elements.
+Sketch out the focus order with arrows before annotating. If the line zig-zags, simplify the layout or regroup elements.
 
 ---
 
@@ -125,7 +125,13 @@ For per-interaction annotation guidance, pair this checklist with the [User Inte
 
 ## 6. Gestures and motion
 
-The [User Interactions tutorial](../tutorials/user-interactions.md#touch-gesture) groups touch gestures into three tiers: **Basic** (single tap, double tap, long press), **Specialized** (swipe, drag, tap-and-hold), and **Advanced** (multi-finger, pinch, rotate, path-based). Use this section to verify each tier is used appropriately.
+The [User Interactions tutorial](../tutorials/user-interactions.md#touch-gesture) groups touch gestures into three tiers: 
+
+1. **Basic** (single tap, double tap, long press), 
+2. **Specialized** (swipe, drag, tap-and-hold), and 
+3. **Advanced** (multi-finger, pinch, rotate, path-based). 
+
+Use this section to verify each tier is used appropriately.
 
 - [ ] **Primary actions use Basic gestures**
 	- Single tap is the most accessible. Reserve it for the most important interactions on a screen.
@@ -154,7 +160,7 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 
 - [ ] **Both portrait and landscape orientations are supported**
 	- Per [SC 1.3.4 Orientation](https://www.w3.org/WAI/WCAG22/Understanding/orientation.html), don't lock orientation unless it's essential (e.g., a piano app). Many users mount their device in a fixed orientation for accessibility reasons.
-- [ ] **Layouts adapt to Dynamic Type (iOS) and Font size scaling (Android)**
+- [ ] **Layouts adapt to iOS' Dynamic Type and Android's Font Size Scaling**
 	- Test at the largest accessibility text sizes per [SC 1.4.4 Resize Text](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html). Content should reflow without truncation or overlap.
 - [ ] **Viewport zoom and viewport resize don't break the layout**
 	- Magnifier, browser zoom inside web views, and split-screen / multitasking on tablets all change the available viewport. No content overlap, no obscured controls.
@@ -204,7 +210,7 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 ## 10. Touch and keyboard navigation
 
 - [ ] **Every touch interaction is reachable with an external keyboard**
-	- Bluetooth keyboards, Switch Control (iOS), and Switch Access (Android) all rely on a sensible focus order. Per [SC 2.1.1 Keyboard](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html), the keyboard interface here means any keyboard or keyboard substitute, not just a physical device.
+	- Bluetooth keyboards, iOS Switch Control, and Android Switch Access all rely on a sensible focus order. Per [SC 2.1.1 Keyboard](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html), the keyboard interface here means any keyboard or keyboard substitute, not just a physical device.
 - [ ] **A visible focus indicator appears when navigating with a keyboard or switch**
 	- Per [SC 2.4.7 Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html) and [SC 2.4.11 Focus Not Obscured (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
 - [ ] **Focus order is annotated and matches the visual flow**
