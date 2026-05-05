@@ -30,7 +30,7 @@ For audit work, refer to the [Mobile-WCAG Mapping (Internal only)](https://githu
 	- Functional graphics (icons, status indicators, control identification) have a **3:1** contrast ratio (or higher).
 	- Verify both system themes since gradients and elevation tints can shift contrast.
 - [ ] **Designs respect user color settings**
-	- Account for high contrast modes, Smart Invert (iOS), and color correction (Android). Don't bake essential information into images that get inverted.
+	- Account for high contrast modes, [Smart Invert (iOS)](https://support.apple.com/guide/iphone/change-display-and-text-size-iph3e2e1fb0/ios), and [color correction (Android)](https://support.google.com/accessibility/android/answer/11183305?hl=en-GB&sjid=1525872318388975084-NC#zippy=%2Cuse-colour-correction:~:text=Colour%20correction%20and%20grayscale%20settings%20help%20your%20device%20compensate%20for%20colour%20blindness.%C2%A0). Don't bake essential information into images that get inverted.
 
 ### Suggested Tools
 
@@ -45,11 +45,11 @@ For audit work, refer to the [Mobile-WCAG Mapping (Internal only)](https://githu
 - [ ] **Each screen has at most one Title**
 	- Not every screen needs a title, but if one is needed, only one is used. Titles live in the top app bar (Android) or navigation bar (iOS) and are announced on view transition. Note: in WCAG terms, [SC 2.4.2 Page Titled](https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html) applies to the application as a whole on native, but the per-screen title is still the right pattern for orientation.
 - [ ] **Headings are used sparingly and only when they help structure the screen**
-	- Unlike the web, mobile screens often don't need headings. Use them when content has clear sections that benefit from rotor or TalkBack heading navigation.
+	- Unlike the web, mobile screens often don't need headings. Use them when content has clear sections that benefit from rotor or [TalkBack](https://support.google.com/accessibility/android/answer/6283677) heading navigation.
 - [ ] **Layouts favor a simple, predictable flow**
 	- On some frameworks like React Native, the operating system determines reading order by scanning the screen roughly top-to-bottom, left-to-right, and there's no API to override it. Designs that follow a clear vertical flow narrate correctly regardless of framework, and they're easier for everyone to scan visually too.
 - [ ] **Reading order matches visual order**
-	- Screen readers narrate in view-tree order. Walk the screen with the VoiceOver rotor (iOS) and TalkBack swipe gestures (Android) to confirm that headings, links, form controls, and landmarks surface in the right order. This is especially important on cards, carousels, and bottom sheets.
+	- Screen readers narrate in view-tree order. Walk the screen with the [VoiceOver](https://support.apple.com/guide/iphone/turn-on-and-practice-voiceover-iph3e2e415f/ios) rotor (iOS) and TalkBack swipe gestures (Android) to confirm that headings, links, form controls, and landmarks surface in the right order. This is especially important on cards, carousels, and bottom sheets.
 - [ ] **Grouping is annotated**
 	- Use a Mobile Grouping Stamp to mark elements that should be announced as one unit (avatar + name + timestamp on a comment, for example). This includes any content block that should read as a single unit rather than several separate stops.
 
@@ -67,7 +67,7 @@ Sketch out the focus order with arrows before annotating. If the line zig-zags, 
 
 - [ ] **Every interactive element has a Label**
 	- Labels help people understand the purpose of a control. They're useful for everyone and especially important for people with cognitive disabilities.
-	- For Voice Control and Voice Access users, the visible label text must be programmatically associated with the control so users can speak the name they see. Per [SC 2.5.3 Label in Name](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html).
+	- For [Voice Control](https://support.apple.com/guide/iphone/use-voice-control-iph2c21a3c88/ios) and [Voice Access](https://support.google.com/accessibility/android/answer/6151848) users, the visible label text must be programmatically associated with the control so users can speak the name they see. Per [SC 2.5.3 Label in Name](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html).
 	- For elements without visible text (icon-only buttons, avatars, etc.), be explicit in your annotations about which label belongs to which control.
 - [ ] **Stateful controls have a Value**
 	- Toggles, sliders, segmented controls, and inputs need a current value (e.g., "On", "75%", "@octocat").
@@ -149,7 +149,7 @@ Use this section to verify each tier is used appropriately.
 	- Per [SC 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html). Reorder lists with up/down buttons, move items with a menu, etc.
 - [ ] **Custom gestures are exposed as VoiceOver and TalkBack Custom Actions**
 	- So screen reader users can discover and trigger them without performing the gesture.
-- [ ] **Animations and transitions respect Reduce Motion**
+- [ ] **Animations and transitions respect [Reduce Motion](https://support.apple.com/guide/iphone/customize-onscreen-motion-iph0b691d3ed/ios)**
 	- Honor `UIAccessibility.isReduceMotionEnabled` (iOS) and `Settings.Global.TRANSITION_ANIMATION_SCALE` (Android). Replace large motion with cross-fades or instant transitions.
 - [ ] **Pointer cancellation is supported**
 	- Per [SC 2.5.2 Pointer Cancellation](https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html), trigger actions on the up-event so users can drag off a control to cancel.
@@ -166,7 +166,7 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 
 - [ ] **Both portrait and landscape orientations are supported**
 	- Per [SC 1.3.4 Orientation](https://www.w3.org/WAI/WCAG22/Understanding/orientation.html), don't lock orientation unless it's essential (e.g., a piano app). Many users mount their device in a fixed orientation for accessibility reasons. _All functionality and content must remain available across orientations._
-- [ ] **Layouts adapt to iOS' Dynamic Type and Android's Font Size Scaling**
+- [ ] **Layouts adapt to [iOS' Dynamic Type](https://developer.apple.com/documentation/uikit/scaling-fonts-automatically) and [Android's Font Size Scaling](https://support.google.com/accessibility/android/answer/11183305)**
 	- Test at the largest accessibility text sizes per [SC 1.4.4 Resize Text](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html). Content should reflow without truncation or overlap.
 - [ ] **Viewport zoom and viewport resize don't break the layout**
 	- Magnifier, browser zoom inside web views, and split-screen / multitasking on tablets all change the available viewport. No content overlap, no obscured controls.
@@ -218,7 +218,7 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 ## 10. Touch and keyboard navigation
 
 - [ ] **Every touch interaction is reachable and operable with an external keyboard**
-	- Bluetooth keyboards, iOS Switch Control, and Android Switch Access all rely on a sensible focus order. Per [SC 2.1.1 Keyboard](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html), the keyboard interface here means any keyboard or keyboard substitute, not just a physical device.
+	- Bluetooth keyboards, [iOS Switch Control](https://support.apple.com/en-us/119835), and [Android Switch Access](https://support.google.com/accessibility/android/answer/6122836) all rely on a sensible focus order. Per [SC 2.1.1 Keyboard](https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html), the keyboard interface here means any keyboard or keyboard substitute, not just a physical device.
 - [ ] **A visible focus indicator appears when navigating with a keyboard or switch**
 	- Per [SC 2.4.7 Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html) and [SC 2.4.11 Focus Not Obscured (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
 - [ ] **Focus order is annotated and matches the visual flow**
