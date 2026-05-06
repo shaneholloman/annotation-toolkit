@@ -32,14 +32,14 @@ For audit work, refer to the [Mobile-WCAG Mapping (Internal only)](https://githu
 - [ ] **Designs respect user color settings**
 	- Account for high contrast modes, [Smart Invert (iOS)](https://support.apple.com/guide/iphone/change-display-and-text-size-iph3e2e1fb0/ios), and [color correction (Android)](https://support.google.com/accessibility/android/answer/11183305?hl=en-GB&sjid=1525872318388975084-NC#zippy=%2Cuse-colour-correction:~:text=Colour%20correction%20and%20grayscale%20settings%20help%20your%20device%20compensate%20for%20colour%20blindness.%C2%A0). Don't bake essential information into images that get inverted.
 
+### Exercises
+Remove the element in question from the design. If the rest still makes sense and is usable without it, the element may not need to meet contrast requirements.
+
 ### Suggested Tools
 - [Accessibility Scanner - Google](https://support.google.com/accessibility/android/answer/6376570) — Detects color contrast issues on Android, among other accessibility checks
 - [Check color contrast - Figma Docs](https://help.figma.com/hc/en-us/articles/360041003774-Apply-paints-with-the-color-picker#h_01JQF1T71AC72G6VDXN27B77V0)
 - [Web Color Contrast Checker - WebAIM](https://webaim.org/resources/contrastchecker/)
 - [Colour Contrast Analyzer for Mac and Windows - Vispero](https://vispero.com/lp/color-contrast-checker/)
-
-### Exercises
-Quick gut-check: remove the element in question from the design. If the rest still makes sense and is usable without it, the element may not need to meet contrast requirements.
 
 ---
 
