@@ -4,7 +4,7 @@ This checklist summarizes accessibility considerations specific to iOS and Andro
 
 Native mobile has its own set of accessibility patterns, APIs, and user expectations that don't map cleanly to the web. Use this checklist when designing or building **native mobile experiences** on iOS and Android. You don't need to also run through the [Designer Checklist](./designer-checklist.md) or [Engineering Checklist](./engineering-checklist.md) for a native app. 
 
-Web and native mobile look different, but they're chasing the same goal: people must be able to perceive, operate, and understand the experience regardless of platform. The patterns, APIs, and conventions diverge, but the underlying user needs don't. This checklist focuses on how that goal gets met on native — where stock controls, system settings, and gesture conventions do a lot of the work that markup and ARIA do on the web.
+Web and native mobile look different, but they're chasing the same goal: people must be able to perceive, operate, and understand the experience regardless of platform. The patterns, APIs, and conventions diverge, but the underlying user needs don't. This checklist focuses on how that goal is met in native apps where stock controls, system settings, and gesture conventions do a lot of the work that markup and ARIA do on the web.
 
 The one exception: if part of your app uses a **web view**, apply the web checklists to that content. Flag those areas with a [View Context Stamp](../tutorials/mobile-annotations.md#view-context-stamps-and-details) so the handoff is explicit. Examples of web view content are an in-app browser, an OAuth flow, embedded docs, or any HTML-rendered content.
 
@@ -38,7 +38,7 @@ For audit work, refer to the [Mobile-WCAG Mapping (Internal only)](https://githu
 Remove the element in question from the design. If the rest still makes sense and is usable without it, the element may not need to meet contrast requirements.
 
 ### Suggested Tools
-- [Accessibility Scanner - Google](https://support.google.com/accessibility/android/answer/6376570) — Detects color contrast issues on Android, among other accessibility checks
+- [Accessibility Scanner - Google](https://support.google.com/accessibility/android/answer/6376570)
 - [Check color contrast - Figma Docs](https://help.figma.com/hc/en-us/articles/360041003774-Apply-paints-with-the-color-picker#h_01JQF1T71AC72G6VDXN27B77V0)
 - [Web Color Contrast Checker - WebAIM](https://webaim.org/resources/contrastchecker/)
 - [Colour Contrast Analyzer for Mac and Windows - Vispero](https://vispero.com/lp/color-contrast-checker/)
@@ -50,7 +50,7 @@ Remove the element in question from the design. If the rest still makes sense an
 - [ ] **Each screen has at most one Title**
 	- Not every screen needs a title, but if one is needed, only one is used. Titles live in the top app bar (Android) or navigation bar (iOS) and are announced on view transition. [SC 2.4.2 Page Titled](https://www.w3.org/WAI/WCAG22/Understanding/page-titled.html) technically applies to the whole app, but per-screen titles are still the right pattern for orientation.
 - [ ] **If a screen has no title bar, include a prominent heading near the top of the content**
-	- Screens without a top app bar (Android) or navigation bar (iOS) should still orient users — a clear, prominent heading at or near the top of the visible content gives screen reader users and everyone else a place to land.
+	- Screens without a top app bar (Android) or navigation bar (iOS) should still orient users. A clear, prominent heading at or near the top of the visible content gives screen reader users and everyone else a place to land.
 - [ ] **Headings are used sparingly and only when they help structure the screen**
 	- Unlike the web, mobile screens often don't need headings. Use them when content has clear sections that benefit from rotor or [TalkBack](https://support.google.com/accessibility/android/answer/6283677) heading navigation.
 - [ ] **Layouts favor a simple, predictable flow**
@@ -75,7 +75,7 @@ Sketch out the focus order with arrows before annotating. If the line zig-zags, 
 - [ ] **Every interactive element has a Label**
 	- Labels help people understand the purpose of a control. They're useful for everyone and especially important for people with cognitive disabilities.
 	- For [Voice Control](https://support.apple.com/guide/iphone/use-voice-control-iph2c21a3c88/ios) and [Voice Access](https://support.google.com/accessibility/android/answer/6151848) users, the visible label text must be programmatically associated with the control so users can speak the name they see. Per [SC 2.5.3 Label in Name](https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html).
-		- On iOS, alternate .accessibilityInputLabels let Voice Control users activate a control with multiple spoken names. For example, a trash icon labeled "Delete" could also accept "trash" or "garbage" — useful when the primary label is long or technical.
+		- On iOS, alternate `.accessibilityInputLabels` let Voice Control users activate a control with multiple spoken names. For example, a trash icon labeled "Delete" could also accept "trash" or "garbage". This is useful when the primary label is long or technical.
 	- For elements without visible text (icon-only buttons, avatars, etc.), be explicit in your annotations about which label belongs to which control.
 - [ ] **Stateful controls have a Value**
 	- Toggles, sliders, segmented controls, and inputs need a current value (e.g., "On", "75%", "@octocat").
@@ -84,15 +84,15 @@ Sketch out the focus order with arrows before annotating. If the line zig-zags, 
 - [ ] **Hints are used only for non-obvious interactions**
 	- Don't put critical info in hints. Users can disable them, and they're announced last.
 - [ ] **Directionality is not used in content**
-	- Avoid wording like "see below" or "to the left/right" — content positions shift across orientations, screen sizes, and reading order. Use "first/last" or "previous/next" instead.
+	- Avoid wording like "see below" or "to the left/right". Content positions shift across orientations, screen sizes, and reading order. Use "first/last" or "previous/next" instead.
 - [ ] **Truncation is only used when unavoidable**
 	- Truncated text hides information and can break when text is scaled up. Prefer reflowing, wrapping, or progressive disclosure (expand/collapse) over truncation. When truncation is unavoidable, ensure the full content is reachable some other way.
 - [ ] **Content is written in plain language**
 	- Aim for an 8th-grade reading level. Explain abbreviations on first use. Avoid complex metaphors, regional phrases, idioms, and jargon. This helps people with cognitive disabilities, non-native speakers, and anyone reading on a small screen in a distracted context.
 - [ ] **Decorative elements are hidden from assistive tech**
-	- Mark with `.accessibilityHidden(true)` (iOS) or `importantForAccessibility="no"` (Android). If you're not sure whether something is decorative, walk through the [W3C alt-text decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) — most images aren't truly decorative.
+	- Mark with `.accessibilityHidden(true)` (iOS) or `importantForAccessibility="no"` (Android). If you're not sure whether something is decorative, walk through the [W3C alt-text decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/). Most images aren't truly decorative.
 - [ ] **Language of the app is set, and any sections in a different language are identified**
-	- On native, [SC 3.1.1 Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html) applies to the application as a whole, not individual screens. For inline text in a different language, identify it programmatically per [SC 3.1.2 Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html). For implementation details across native frameworks, see [Appt's SC 3.1.2 guidance](https://appt.org/en/guidelines/wcag/success-criterion-3-1-2).
+	- In native apps, [SC 3.1.1 Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html) applies to the application as a whole, not individual screens. For inline text in a different language, identify it programmatically per [SC 3.1.2 Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html). For implementation details across native frameworks, see [Appt's SC 3.1.2 guidance](https://appt.org/en/guidelines/wcag/success-criterion-3-1-2).
 
 ### Annotations that can help
 - [Mobile Details](../tutorials/mobile-annotations.md#mobile-details)
@@ -155,7 +155,7 @@ The [User Interactions tutorial](../tutorials/user-interactions.md#touch-gesture
 Use this section to verify each tier is used appropriately.
 
 - [ ] **Primary actions use Basic gestures**
-	- Single tap is the foundational, most accessible touch gesture. Interactive elements assume single tap unless otherwise specified — reach for Specialized or Advanced gestures only when there's a strong reason and an alternative path exists.
+	- Single tap is the foundational, most accessible touch gesture. Interactive elements assume single tap unless otherwise specified. Reach for Specialized or Advanced gestures only when there's a strong reason and an alternative path exists.
 - [ ] **Specialized gestures are used sparingly and have a single-tap alternative**
 	- Pinch-to-zoom, swipe-to-delete, swipe-to-reveal-actions, and tap-and-hold all need a button or menu equivalent. Required by [SC 2.5.1 Pointer Gestures](https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html).
 - [ ] **Advanced gestures are avoided unless essential**
@@ -163,7 +163,7 @@ Use this section to verify each tier is used appropriately.
 - [ ] **Drag-and-drop has a non-dragging alternative**
 	- Per [SC 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html). Reorder lists with up/down buttons, move items with a menu, etc.
 - [ ] **Custom components support the VoiceOver scrub gesture (iOS)**
-	- On iOS, the two-finger scrub (Z-shape) gesture acts as a back/dismiss for VoiceOver users — it can navigate backward, dismiss modals, and collapse components. Stock components handle this automatically. Custom components that should be dismissible or collapsible need scrub support wired up manually.
+	- On iOS, the two-finger scrub (Z-shape) gesture acts as a back/dismiss for VoiceOver users. It can navigate backward, dismiss modals, and collapse components. Stock components handle this automatically. Custom components that should be dismissible or collapsible need scrub support wired up manually.
 - [ ] **Custom Actions are also exposed to other accessibility services**
 	- Alternatives to gestures are needed by users of speech recognition (Voice Control / Voice Access), Switch Control / Switch Access, and external keyboard navigation, not just screen reader users.
 - [ ] **Animations and transitions respect [Reduce Motion](https://support.apple.com/guide/iphone/customize-onscreen-motion-iph0b691d3ed/ios)**
@@ -190,7 +190,7 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 - [ ] **Reduce Motion is honored**
 	- Annotate any motion-heavy transition with the Reduced motion device setting so engineering knows to gate it.
 - [ ] **Voice Control labels match visible text**
-	- Voice Control (iOS) and Voice Access (Android) let users speak the name of a control. The visible text and programmatic label must match — if they don't, voice users have to fall back on workarounds. On iOS, alternate .accessibilityInputLabels can serve voice control users when a single label can't do both jobs.
+	- Voice Control (iOS) and Voice Access (Android) let users speak the name of a control. The visible text and programmatic label must match. If they don't, voice users have to fall back on workarounds. On iOS, alternate .accessibilityInputLabels can serve voice control users when a single label can't do both jobs.
 - [ ] **Functionality does not require device motion to operate**
 	- Shake-to-undo, tilt-to-scroll, and similar interactions need a button equivalent and should be possible to disable. Per [SC 2.5.4 Motion Actuation](https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html).
 
@@ -225,11 +225,11 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 - [ ] **Layouts adapt across device sizes**
 	- Cover small phones, large phones, foldables, and tablets. Verify safe areas, notches, and home indicators don't obscure content.
 - [ ] **Content reflows without loss of information or functionality**
-	- On native, [SC 1.4.10 Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) applies through WCAG2ICT guidance: when users resize text via Dynamic Type or font scaling, content should reflow without requiring scrolling in two dimensions for primary content. Tables, image galleries, and similar are reasonable exceptions.
+	- In native apps, [SC 1.4.10 Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) applies through WCAG2ICT guidance: when users resize text via Dynamic Type or font scaling, content should reflow without requiring scrolling in two dimensions for primary content.
 - [ ] **Persistent UI (nav, help, status) appears in consistent locations across screens**
 	- Per [SC 3.2.3 Consistent Navigation](https://www.w3.org/WAI/WCAG22/Understanding/consistent-navigation.html) and [SC 3.2.6 Consistent Help](https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html).
 - [ ] **Web view content (only) supports text spacing overrides**
-	- [SC 1.4.12 Text Spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html) applies only inside a web view on native. For embedded HTML content, verify line height up to 1.5x font size, paragraph spacing up to 2x, letter spacing up to 0.12x, and word spacing up to 0.16x. Native UI is governed by Dynamic Type / font scaling instead (see §7).
+	- [SC 1.4.12 Text Spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html) applies only inside a web view in native apps. For embedded HTML content, verify line height up to 1.5x font size, paragraph spacing up to 2x, letter spacing up to 0.12x, and word spacing up to 0.16x. Native UI is governed by Dynamic Type / font scaling instead (see §7).
 
 ---
 
@@ -240,8 +240,8 @@ Mobile users rely heavily on system-level settings to make their device usable. 
 - [ ] **A visible focus indicator appears when navigating with a keyboard or switch**
 	- Per [SC 2.4.7 Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html) and [SC 2.4.11 Focus Not Obscured (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
 - [ ] **Focus order is annotated for complex layouts when needed**
-	- Default focus order works fine for simple, top-to-bottom screens — don't override it. Avoid prescribing focus order on screens where it isn't necessary.
-    - For complex layouts (cards with multiple actions, side-by-side groups, custom controls), annotate the intended focus order so engineering knows where overrides are needed. 
+	- Default focus order works fine for simple, top-to-bottom screens, so don't override it. Avoid prescribing focus order on screens where it isn't necessary.
+	- For complex layouts (cards with multiple actions, side-by-side groups, custom controls), annotate the intended focus order so engineering knows where overrides are needed. 
 - [ ] **There are no focus traps**
 	- Modals, sheets, and overlays must let users dismiss and return focus to a logical place. Per [SC 2.1.2 No Keyboard Trap](https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html).
 - [ ] **Custom controls expose proper accessibility actions**
